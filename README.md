@@ -14,7 +14,10 @@ This is a simple chatbot interface built with React. It includes a theme toggle 
    cd chatbot-interface
    ```
 2. Install dependencies:
+
+   ```
    npm install
+   ```
 
 ## Getting Started
 
@@ -30,8 +33,10 @@ pnpm dev
 bun dev
 ```
 
+4. Open your browser and navigate to
+
 ```
-4. Open your browser and navigate to http://localhost:3000.
+http://localhost:3000
 ```
 
 ```
