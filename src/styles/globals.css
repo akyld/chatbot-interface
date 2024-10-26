@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-100 dark:bg-gray-900 flex justify-center items-center h-screen;
+}
+
+.chat-container {
+  @apply w-full sm:max-w-full md:max-w-6xl bg-gray-100 dark:bg-gray-800 sm:rounded-none md:rounded-3xl shadow-lg flex flex-col overflow-hidden sm:my-0 md:my-4;
+}
+
+.chat-box {
+  @apply flex-1 p-4 overflow-y-auto bg-gray-100 dark:bg-gray-800;
+}
+
+.message-bubble {
+  @apply mb-2 p-3 rounded-full text-sm flex items-center border border-transparent;
+}
+
+.message-bubble.user {
+  @apply bg-[#5d1bee] text-white self-end ml-auto;
+}
+
+.message-bubble.bot {
+  @apply bg-gray-200 dark:bg-gray-700 text-black dark:text-white self-start mr-auto;
+}
+.timestamp {
+  @apply block text-xs mt-1 text-gray-500 dark:text-gray-400;
+}
+
+.message-bubble.user .timestamp {
+  @apply text-white dark:text-white;
+}
+
+.message-input {
+  @apply flex p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800;
+}
+
+.message-input input {
+  @apply flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-full mr-2 bg-white dark:bg-gray-900 text-black dark:text-white dark:border-transparent;
+}
+
+.message-input button {
+  @apply p-3 bg-[#5d1bee] text-white rounded-full;
+}
+
+.message-input button:hover {
+  @apply bg-[#4a14c7];
+}

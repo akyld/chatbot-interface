@@ -1,95 +1,52 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
 
-export default function Home() {
+import React, { useState, useEffect } from 'react'
+import ChatBox from '../components/ChatBox'
+import MessageInput from '../components/MessageInput'
+import ThemeToggle from '../components/ThemeToggle'
+import { botResponses } from '../data/botResponses'
+
+const Home = () => {
+  const [messages, setMessages] = useState([])
+  const [theme, setTheme] = useState('light')
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [theme])
+
+  const addMessage = (text, sender) => {
+    const newMessage = {
+      text,
+      sender,
+      timestamp: new Date().toLocaleTimeString(),
+    }
+    setMessages((prevMessages) => [...prevMessages, newMessage])
+  }
+
+  const handleSend = (text) => {
+    addMessage(text, 'user')
+    const botResponse =
+      botResponses[Math.floor(Math.random() * botResponses.length)]
+    setTimeout(() => addMessage(botResponse, 'bot'), 1000)
+  }
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
+  }
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div className="flex flex-col h-screen items-center justify-center w-full">
+      <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+      <div className="chat-container w-full max-w-6xl flex-1 flex flex-col md:my-10">
+        <ChatBox messages={messages} />
+        <MessageInput onSend={handleSend} />
+      </div>
     </div>
-  );
+  )
 }
+
+export default Home
