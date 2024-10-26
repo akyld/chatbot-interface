@@ -30,11 +30,15 @@ pnpm dev
 bun dev
 ```
 
+```
 4. Open your browser and navigate to http://localhost:3000.
+```
 
+```
 Approach
 The Home component manages the state of the messages and the theme.
 The ChatBox component displays the messages and a placeholder text when there are no messages.
 The MessageInput component handles user input and sends messages.
 The ThemeToggle component toggles between light and dark themes.
 Tailwind CSS and Shadcn.ui used for styling the components.
+```
